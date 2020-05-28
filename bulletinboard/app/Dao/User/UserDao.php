@@ -4,13 +4,11 @@ namespace App\Dao\User;
 
 use App\Contracts\Dao\User\UserDaoInterface;
 use App\Models\User;
-use DB;
-use Auth;
 
 /**
  * SystemName : bulletinboard
  * ModuleName : User
-*/
+ */
 class UserDao implements UserDaoInterface
 {
     /**
@@ -18,10 +16,10 @@ class UserDao implements UserDaoInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function storeUser($user)
     {
-        $store_user = new User ([
+        $store_user = new User([
             'name' => $user->name,
             'email' => $user->email,
             'password' => $user->password,
@@ -33,7 +31,7 @@ class UserDao implements UserDaoInterface
             'create_user_id' => $user->create_user_id,
             'updated_user_id' => $user->updated_user_id,
         ]);
-        $store_user -> save();
+        $store_user->save();
         return back();
     }
 
@@ -42,7 +40,7 @@ class UserDao implements UserDaoInterface
      *
      * @param $user
      * @return void
-    */
+     */
     public function showUser($user)
     {
         $user = new User;
@@ -55,7 +53,7 @@ class UserDao implements UserDaoInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function searchUser($request)
     {
         session([
@@ -69,22 +67,17 @@ class UserDao implements UserDaoInterface
         $email = $request->input('email');
         $from = $request->input('fromDate');
         $to = $request->input('toDate');
-        if(empty($from) && empty($to))
-        {
-            $user = User::where ('name', 'LIKE', '%' . $name . '%' )
-            ->where ('email', 'LIKE', '%' . $email . '%' )
-            ->orderby('id', 'ASC')
-            ->paginate(10);
-        }
-        else 
-        {
-            $user = User::whereBetween('created_at', [$from." 00:00:00",$to." 23:59:59"])
-            ->orderby('id', 'ASC')
-            ->paginate(10);
+        if (empty($from) && empty($to)) {
+            $user = User::where('name', 'LIKE', '%' . $name . '%')
+                ->where('email', 'LIKE', '%' . $email . '%')
+                ->orderby('id', 'ASC')
+                ->paginate(10);
+        } else {
+            $user = User::whereBetween('created_at', [$from . " 00:00:00", $to . " 23:59:59"])
+                ->orderby('id', 'ASC')
+                ->paginate(10);
         }
         return $user;
-
-
     }
 
     /**
@@ -92,7 +85,7 @@ class UserDao implements UserDaoInterface
      *
      * @param $id
      * @return void
-    */
+     */
     public function destroy($id)
     {
         $user = User::find($id)->delete();
@@ -104,7 +97,7 @@ class UserDao implements UserDaoInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function userUpdate($request)
     {
         $user = new User();
@@ -116,31 +109,9 @@ class UserDao implements UserDaoInterface
         $user->dob = $request->input('dob');
         $user->address = $request->input('address');
         $user->profile = $request->input('profile');
-        $user->updated_user_id = Auth::user()->id;
+        $user->updated_user_id = auth()->user()->id;
         $user->updated_at = now();
         $user->save();
         return back();
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

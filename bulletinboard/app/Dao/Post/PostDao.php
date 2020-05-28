@@ -4,13 +4,11 @@ namespace App\Dao\Post;
 
 use App\Contracts\Dao\Post\PostDaoInterface;
 use App\Models\Post;
-use DB;
-use Auth;
 
 /**
  * SystemName : bulletinboard
  * ModuleName : Post
-*/
+ */
 class PostDao implements PostDaoInterface
 {
     /**
@@ -18,10 +16,10 @@ class PostDao implements PostDaoInterface
      * 
      *  @param $post
      *  @return void
-    */
+     */
     public function storePost($post)
     {
-        $storepost = new Post ([
+        $storepost = new Post([
             'title' => $post->title,
             'description' => $post->description,
             'create_user_id' => $post->create_user_id,
@@ -36,7 +34,7 @@ class PostDao implements PostDaoInterface
      *  
      *  @param $postdata
      *  @return void
-    */
+     */
     public function showPost($postdata)
     {
         $postdata = new Post;
@@ -49,21 +47,20 @@ class PostDao implements PostDaoInterface
      *  
      *  @param  $request
      *  @return void
-    */
+     */
     public function searchPost($request)
     {
         session(['search' => $request->search]);
-        $search = $request -> get('search');
+        $search = $request->get('search');
         $postdata = Post::with('users')
-        ->where('title', 'LIKE', '%' . $search . '%' )
-        ->orWhere('description', 'LIKE', '%' . $search . '%' )
-        ->orWhereHas('users', function($query) use ($search){
+            ->where('title', 'LIKE', '%' . $search . '%')
+            ->orWhere('description', 'LIKE', '%' . $search . '%')
+            ->orWhereHas('users', function ($query) use ($search) {
 
-            $query->where('name', 'like', '%'. $search. '%');
-
-        })
-        ->orderBy('id','ASC')
-        -> paginate(10);
+                $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('id', 'ASC')
+            ->paginate(10);
         return $postdata;
     }
 
@@ -72,7 +69,7 @@ class PostDao implements PostDaoInterface
      *  
      *  @param $id
      *  @return void
-    */
+     */
     public function destroy($id)
     {
         Post::find($id)->delete();
@@ -84,8 +81,9 @@ class PostDao implements PostDaoInterface
      *  
      *  @param $request
      *  @return void
-    */
-    public function update($request) {
+     */
+    public function update($request)
+    {
         $post = new Post();
         $post = Post::find($request->input('id'));
         $post->title = $request->input('title');
@@ -94,18 +92,9 @@ class PostDao implements PostDaoInterface
         if (is_null($post->status)) {
             $post->status = '0';
         }
-        $post->updated_user_id =Auth::user()->id;
+        $post->updated_user_id = auth()->user()->id;
         $post->updated_at = now();
         $post->save();
         return $post;
     }
 }
-
-
-
-
-
-
-
-
-

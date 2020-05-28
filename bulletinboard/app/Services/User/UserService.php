@@ -5,8 +5,6 @@ namespace App\Service\User;
 use App\Contracts\Dao\User\UserDaoInterface;
 use App\Contracts\Services\User\UserServicesInterface;
 use App\Models\User;
-use Auth;
-use Hash;
 
 /**
  * SystemName : bulletinboard
@@ -76,8 +74,8 @@ use Hash;
         $user->phone = $request->input('phone');
         $user->dob = $request->dob;
         $user->address = $request->address;
-        $user->create_user_id = Auth::user()->id;
-        $user->updated_user_id = Auth::user()->id;
+        $user->create_user_id = auth()->user()->id;
+        $user->updated_user_id = auth()->user()->id;
         $user->created_at = now();
         $user->updated_at = now();
         return $this->UserDao->storeUser($user);
@@ -151,24 +149,3 @@ use Hash;
         return $this->UserDao->userUpdate($request);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

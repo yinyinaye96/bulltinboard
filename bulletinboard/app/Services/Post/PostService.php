@@ -5,23 +5,21 @@ namespace App\Service\Post;
 use App\Contracts\Dao\Post\PostDaoInterface;
 use App\Contracts\Services\Post\PostServiceInterface;
 use App\Models\Post;
-use Auth;
-use Hash;
 
 /**
  * SystemName : bulletinboard
  * ModuleName : Post
-*/
+ */
 class PostService implements PostServiceInterface
 {
     private $PostDao;
 
     /**
-    * Class Constructor
+     * Class Constructor
 
-    * @param OperatorPostDaoInterface $PostDao
-    * @return
-    */
+     * @param OperatorPostDaoInterface $PostDao
+     * @return
+     */
     public function __construct(PostDaoInterface $PostDao)
     {
         $this->PostDao = $PostDao;
@@ -33,7 +31,7 @@ class PostService implements PostServiceInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function confirmPost($request)
     {
         session([
@@ -41,7 +39,7 @@ class PostService implements PostServiceInterface
             'description' => $request->description
         ]);
         $post = new Post;
-        $post->title = $request->title ;
+        $post->title = $request->title;
         $post->description = $request->description;
         return $post;
     }
@@ -51,14 +49,14 @@ class PostService implements PostServiceInterface
      * 
      *  @param $request
      *  @return void
-    */
-    public function storePost($request) 
+     */
+    public function storePost($request)
     {
         $post = new Post;
-        $post->title = $request->title ;
+        $post->title = $request->title;
         $post->description = $request->description;
-        $post->create_user_id = Auth::user()->id;
-        $post->updated_user_id =Auth::user()->id;
+        $post->create_user_id = auth()->user()->id;
+        $post->updated_user_id = auth()->user()->id;
         $post->created_at = now();
         $post->updated_at = now();
         return $this->PostDao->storePost($post);
@@ -68,7 +66,7 @@ class PostService implements PostServiceInterface
      *  
      *  @param $postdata
      *  @return void
-    */
+     */
     public function showPost($postdata)
     {
         return $this->PostDao->showPost($postdata);
@@ -79,7 +77,7 @@ class PostService implements PostServiceInterface
      *  
      *  @param  $postdata
      *  @return void
-    */
+     */
     public function searchPost($postdata)
     {
         return $this->PostDao->searchPost($postdata);
@@ -90,8 +88,8 @@ class PostService implements PostServiceInterface
      *  
      *  @param $id
      *  @return void
-    */
-    public function destroy($id) 
+     */
+    public function destroy($id)
     {
         return $this->PostDao->destroy($id);
     }
@@ -101,8 +99,9 @@ class PostService implements PostServiceInterface
      *  
      *  @param $request
      *  @return void
-    */
-    public function updateConfirmPost($request) {
+     */
+    public function updateConfirmPost($request)
+    {
         $post = new Post();
         $post = Post::find($request->input('id'));
         $post->title = $request->title;
@@ -116,29 +115,9 @@ class PostService implements PostServiceInterface
      *  
      *  @param $post
      *  @return void
-    */
-    public function update($post) 
+     */
+    public function update($post)
     {
         return $this->PostDao->update($post);
     }
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

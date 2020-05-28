@@ -4,29 +4,21 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Contracts\Services\User\UserServicesInterface;
-use Illuminate\Support\Facades\DB;
-use App\Services\User\UserService;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Requests;
 use App\Http\Requests\UserConfirmRequest;
 use App\Http\Requests\EmailRequest;
 use App\Http\Requests\UserUpdateComfirmRequest;
 use App\Http\Requests\ChangePassword;
-use Illuminate\Support\Facades\Validator;
-use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
-use Auth;
-use Image;
 
 /**
  * SystemName : bulletinboard
  * ModuleName : User
-*/
+ */
 
 class UserController extends Controller
-{   
+{
     private $userService;
 
     /**
@@ -39,7 +31,6 @@ class UserController extends Controller
         $this->middleware('auth');
         $this->userService = $userService;
     }
-    
     /**
      * Show Create User Form
      *
@@ -55,13 +46,12 @@ class UserController extends Controller
      *
      * @param UserConfirmRequest $request
      * @return void
-    */
-    public function userconfirm(UserConfirmRequest $request) 
+     */
+    public function userconfirm(UserConfirmRequest $request)
     {
         $validator = $request->validated();
         $user = $this->userService->userconfirm($request);
         return view('users.create-user-comfirm', compact('user'));
-        
     }
 
     /**
@@ -69,8 +59,8 @@ class UserController extends Controller
      *
      * @param EmailRequest $request
      * @return void
-    */
-    public function storeUser(EmailRequest $request) 
+     */
+    public function storeUser(EmailRequest $request)
     {
         session()->forget([
             'name',
@@ -85,13 +75,12 @@ class UserController extends Controller
         $user = $this->userService->storeUser($request);
         return redirect('userlist');
     }
-    
     /**
      * Show User List
      *
      * @return void
-    */
-    public function showUser() 
+     */
+    public function showUser()
     {
         session()->forget([
             'name',
@@ -110,12 +99,11 @@ class UserController extends Controller
      *
      * @param Request $request
      * @return void
-    */
-    public function searchUser(Request $request) 
+     */
+    public function searchUser(Request $request)
     {
-        
         $user = $this->userService->searchUser($request);
-        return view('users.user-list',compact('user'));
+        return view('users.user-list', compact('user'));
     }
 
     /**
@@ -123,11 +111,11 @@ class UserController extends Controller
      *
      * @param $id
      * @return void
-    */
-    public function destroy($id) 
+     */
+    public function destroy($id)
     {
         $user = User::find($id);
-        $user->deleted_user_id = Auth::user()->id;
+        $user->deleted_user_id = auth()->user()->id;
         $user->save();
         $this->userService->destroy($id);
         return redirect('userlist');
@@ -137,7 +125,7 @@ class UserController extends Controller
      * Show User Profile Funaction
      *
      * @return void
-    */
+     */
     public function profile()
     {
         return view('users.user-profile');
@@ -147,7 +135,7 @@ class UserController extends Controller
      * Show User Update Funaction
      *
      * @return void
-    */
+     */
     public function updateUser()
     {
         return view('users.update-user');
@@ -158,7 +146,7 @@ class UserController extends Controller
      *
      * @param UserUpdateComfirmRequest $request
      * @return void
-    */
+     */
     public function updateconfirmUser(UserUpdateComfirmRequest $request)
     {
         $user = $this->userService->updateconfirmUser($request);
@@ -170,7 +158,7 @@ class UserController extends Controller
      *
      * @param Request $request
      * @return void
-    */
+     */
     public function userUpdate(Request $request)
     {
         $user = $this->userService->userUpdate($request);
@@ -181,7 +169,7 @@ class UserController extends Controller
      *Show User Password 
      *
      * @return void
-    */
+     */
     public function password()
     {
         return view('users.change-password');
@@ -192,12 +180,10 @@ class UserController extends Controller
      *
      * @param ChangePassword $request
      * @return void
-    */
+     */
     public function changePassword(ChangePassword $request)
     {
-        User::find(Auth::user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
         return redirect('updateuser');
     }
-
 }
-

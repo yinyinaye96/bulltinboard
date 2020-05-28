@@ -6,16 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Contracts\Services\Post\PostServiceInterface;
-use App\Services\Post\PostService;
 use App\Http\Requests\PostComfirmRequest;
-use Illuminate\Support\Facades\Validator;
-use Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Download;
 use App\Imports\CSVFile;
-use Illuminate\Http\Response;
 
 /**
  * SystemName : bulletinboard
@@ -29,10 +23,10 @@ class PostController extends Controller
      * Create a new controller instance.
      *
      * @param PostServiceInterface $PostService
-    */
+     */
     public function __construct(PostServiceInterface $PostService)
     {
-        $this->middleware('auth', ['except' => ['showPost','searchPost','export']]);
+        $this->middleware('auth', ['except' => ['showPost', 'searchPost', 'export']]);
         $this->PostService = $PostService;
     }
 
@@ -40,7 +34,7 @@ class PostController extends Controller
      * Show Create Post Form
      * 
      *  @return void
-    */
+     */
     public function createPost()
     {
         return view('posts.create-post');
@@ -51,7 +45,7 @@ class PostController extends Controller
      * 
      *  @param PostComfirmRequest $request
      *  @return void
-    */
+     */
     public function confirmPost(PostComfirmRequest $request)
     {
         $validator = $request->validated();
@@ -64,7 +58,7 @@ class PostController extends Controller
      * 
      *  @param Request $request
      *  @return void
-    */
+     */
     public function storePost(Request $request)
     {
         session()->forget([
@@ -79,7 +73,7 @@ class PostController extends Controller
      * Show Post list
      *  
      *  @return void
-    */
+     */
     public function showPost()
     {
         session()->forget([
@@ -95,11 +89,11 @@ class PostController extends Controller
      *  
      *  @param Request $request
      *  @return void
-    */
-    public function searchPost(Request $request) 
+     */
+    public function searchPost(Request $request)
     {
         $postdata = $this->PostService->searchPost($request);
-        return view('posts.post-list',compact('postdata'));
+        return view('posts.post-list', compact('postdata'));
     }
 
     /**
@@ -107,11 +101,11 @@ class PostController extends Controller
      *  
      *  @param $id
      *  @return void
-    */
+     */
     public function destroy($id)
-    {  
+    {
         $post = Post::find($id);
-        $post->deleted_user_id = Auth::user()->id;
+        $post->deleted_user_id = auth()->user()->id;
         $post->save();
         $this->PostService->destroy($id);
         return redirect('posts/postlist');
@@ -122,7 +116,7 @@ class PostController extends Controller
      *  
      *  @param $id
      *  @return void
-    */
+     */
     public function editPost($id)
     {
         $post = Post::find($id);
@@ -134,7 +128,7 @@ class PostController extends Controller
      *  
      *  @param PostComfirmRequest $request
      *  @return void
-    */
+     */
     public function updateConfirmPost(PostComfirmRequest $request)
     {
         $validator = $request->validated();
@@ -147,8 +141,8 @@ class PostController extends Controller
      *  
      *  @param Request $request
      *  @return void
-    */
-    public function update(Request $request) 
+     */
+    public function update(Request $request)
     {
         $post = $this->PostService->update($request);
         return redirect('/posts/postlist');
@@ -159,16 +153,17 @@ class PostController extends Controller
      *  
      *  @param Request $request
      *  @return void
-    */
-    public function export(Request $request){
-    	return Excel::download(new Download, 'posts.csv');
+     */
+    public function export(Request $request)
+    {
+        return Excel::download(new Download, 'posts.csv');
     }
 
     /**
      * Show Upload Post Form
      *  
      *  @return void
-    */
+     */
     public function uploadPost()
     {
         return view('posts.upload-csv');
@@ -179,24 +174,22 @@ class PostController extends Controller
      *  
      *  @param Request $request
      *  @return void
-    */
+     */
     public function import(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:csv,txt|unique:posts,title', 
-            // 'title' => 'required|string|min:3|max:255|unique:posts,title',
+            'file' => 'required|mimes:csv,txt|unique:posts,title',
         ]);
         $files = $request->file('file');
-        $destinationPath = 'uploadedfile/'.auth()->user()->id.'/csv';
+        $destinationPath = 'uploadedfile/' . auth()->user()->id . '/csv';
         $filename = $files->getClientOriginalName();
         $extension = $files->getClientOriginalExtension();
-        if(file_exists(public_path($destinationPath = 'uploadedfile/'.auth()->user()->id.'/csv'. $filename))){
+        if (file_exists(public_path($destinationPath = 'uploadedfile/' . auth()->user()->id . '/csv' . $filename))) {
             return redirect('/posts/uploadpost')->with('duplicate', 'Duplicate Post Upload');
-        }else{
+        } else {
             Excel::import(new CSVFile, $files);
             $files->move($destinationPath, $filename);
             return redirect('/posts/postlist');
         }
     }
-    
-} 
+}

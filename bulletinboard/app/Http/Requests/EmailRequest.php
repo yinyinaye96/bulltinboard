@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Auth;
 
 class EmailRequest extends FormRequest
 {
@@ -28,7 +27,7 @@ class EmailRequest extends FormRequest
         return [
             'email' => [
                 'required',
-                Rule::unique('users', 'email')->ignore(Auth::user()->id),
+                Rule::unique('users', 'email')->ignore(auth()->user()->id),
 
             ],
         ];

@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\MatchOldPassword;
-use Illuminate\Support\Facades\Hash;
 
 class ChangePassword extends FormRequest
 {

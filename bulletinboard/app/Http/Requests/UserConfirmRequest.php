@@ -30,8 +30,6 @@ class UserConfirmRequest extends FormRequest
             'confirm_password' => 'required|same:password|min:8',
             'type' => 'required',
             'profile' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
-            
         ];
-        
     }
 }

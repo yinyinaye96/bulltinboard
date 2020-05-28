@@ -9,7 +9,7 @@ interface PostDaoInterface
      * 
      *  @param $post
      *  @return void
-    */
+     */
     public function storePost($post);
 
     /**
@@ -17,7 +17,7 @@ interface PostDaoInterface
      *  
      *  @param $postdata
      *  @return void
-    */
+     */
     public function showPost($postdata);
 
     /**
@@ -25,7 +25,7 @@ interface PostDaoInterface
      *  
      *  @param  $request
      *  @return void
-    */
+     */
     public function searchPost($request);
 
     /**
@@ -33,7 +33,7 @@ interface PostDaoInterface
      *  
      *  @param $id
      *  @return void
-    */
+     */
     public function destroy($id);
 
     /**
@@ -41,11 +41,6 @@ interface PostDaoInterface
      *  
      *  @param $post
      *  @return void
-    */
+     */
     public function update($post);
 }
-
-
-
-
-

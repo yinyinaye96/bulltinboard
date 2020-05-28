@@ -8,7 +8,7 @@ interface UserServicesInterface
      *Create  User Confirm Function
      * @param $request
      * @return void
-    */
+     */
     public function userconfirm($request);
 
     /**
@@ -16,7 +16,7 @@ interface UserServicesInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function storeUser($request);
 
     /**
@@ -24,7 +24,7 @@ interface UserServicesInterface
      *
      * @param $user
      * @return void
-    */
+     */
     public function showUser($user);
 
     /**
@@ -32,7 +32,7 @@ interface UserServicesInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function searchUser($request);
 
     /**
@@ -40,15 +40,15 @@ interface UserServicesInterface
      *
      * @param $id
      * @return void
-    */
+     */
     public function destroy($id);
 
-     /**
+    /**
      *Create Update User Confirm Function
      *
      * @param $request
      * @return void
-    */
+     */
     public function updateconfirmUser($request);
 
     /**
@@ -56,7 +56,6 @@ interface UserServicesInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function userUpdate($request);
-
 }

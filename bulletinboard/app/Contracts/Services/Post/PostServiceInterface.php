@@ -9,7 +9,7 @@ interface PostServiceInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function confirmPost($request);
 
     /**
@@ -17,7 +17,7 @@ interface PostServiceInterface
      * 
      *  @param $request
      *  @return void
-    */
+     */
     public function storePost($request);
 
     /**
@@ -25,7 +25,7 @@ interface PostServiceInterface
      *  
      *  @param $postdata
      *  @return void
-    */
+     */
     public function showPost($postdata);
 
     /**
@@ -33,7 +33,7 @@ interface PostServiceInterface
      *  
      *  @param  $postdata
      *  @return void
-    */
+     */
     public function searchPost($postdata);
 
     /**
@@ -41,7 +41,7 @@ interface PostServiceInterface
      *  
      *  @param $id
      *  @return void
-    */
+     */
     public function destroy($id);
 
     /**
@@ -49,7 +49,7 @@ interface PostServiceInterface
      *  
      *  @param $request
      *  @return void
-    */
+     */
     // public function updateConfirmPost($request);
 
     /**
@@ -57,12 +57,6 @@ interface PostServiceInterface
      *  
      *  @param $post
      *  @return void
-    */
+     */
     public function update($post);
-    
 }
-
-
-
-
-

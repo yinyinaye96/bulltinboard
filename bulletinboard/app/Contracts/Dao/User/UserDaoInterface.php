@@ -10,7 +10,7 @@ interface UserDaoInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function storeUser($request);
 
     /**
@@ -18,7 +18,7 @@ interface UserDaoInterface
      *
      * @param $user
      * @return void
-    */
+     */
     public function showUser($user);
 
     /**
@@ -26,7 +26,7 @@ interface UserDaoInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function searchUser($request);
 
     /**
@@ -34,7 +34,7 @@ interface UserDaoInterface
      *
      * @param $id
      * @return void
-    */
+     */
     public function destroy($id);
 
     /**
@@ -42,45 +42,6 @@ interface UserDaoInterface
      *
      * @param $request
      * @return void
-    */
+     */
     public function userUpdate($request);
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

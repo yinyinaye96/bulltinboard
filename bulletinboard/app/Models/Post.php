@@ -18,23 +18,27 @@ class Post extends Model
      * The table associated with the model
      *
      * @var string
-    */
+     */
     protected $table = 'posts';
 
     /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
-    protected $fillable = ['title', 'description', 'status','create_user_id',
-    'updated_user_id', 'deleted_user_id', 'created_at', 'updated_at', 'deleted_at'];
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'description', 'status', 'create_user_id',
+        'updated_user_id', 'deleted_user_id', 'created_at', 'updated_at', 'deleted_at'
+    ];
 
-    
-    public function users(){
-        return $this->belongsTo( User::class , 'create_user_id');
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'create_user_id');
     }
 
-    public function updateUsers(){
-        return $this->belongsTo( User::class , 'updated_user_id');
-    } 
+    public function updateUsers()
+    {
+        return $this->belongsTo(User::class, 'updated_user_id');
+    }
 }
