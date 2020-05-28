@@ -67,6 +67,10 @@ class PostController extends Controller
     */
     public function storePost(Request $request)
     {
+        session()->forget([
+            'title',
+            'description'
+        ]);
         $post = $this->PostService->storePost($request);
         return redirect('posts/postlist');
     }
@@ -136,7 +140,6 @@ class PostController extends Controller
         $validator = $request->validated();
         $post = $this->PostService->updateConfirmPost($request);
         return view('posts.update-post-comfirm', compact('post'));
-        // return response($post);
     }
 
     /**
@@ -149,7 +152,6 @@ class PostController extends Controller
     {
         $post = $this->PostService->update($request);
         return redirect('/posts/postlist');
-        // return response($post);
     }
 
     /**

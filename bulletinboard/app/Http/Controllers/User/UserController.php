@@ -72,6 +72,15 @@ class UserController extends Controller
     */
     public function storeUser(EmailRequest $request) 
     {
+        session()->forget([
+            'name',
+            'email',
+            'password',
+            'type',
+            'phone',
+            'dob',
+            'address'
+        ]);
         $validator = $request->validated();
         $user = $this->userService->storeUser($request);
         return redirect('userlist');

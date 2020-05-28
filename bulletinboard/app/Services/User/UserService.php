@@ -32,6 +32,15 @@ use Hash;
     */
     public function UserConfirm($request)
     {
+        session([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'type' => $request->type,
+            'phone' => $request->phone,
+            'dob' => $request->dob,
+            'address' => $request->address
+        ]);
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;

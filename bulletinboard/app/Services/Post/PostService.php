@@ -36,6 +36,10 @@ class PostService implements PostServiceInterface
     */
     public function confirmPost($request)
     {
+        session([
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
         $post = new Post;
         $post->title = $request->title ;
         $post->description = $request->description;
@@ -104,15 +108,6 @@ class PostService implements PostServiceInterface
         $post->title = $request->title;
         $post->description = $request->description;
         $post->status = $request->status;
-        // if ($post->status == 0) {
-        //     $post->status = '1';
-        // }
-        // elseif ($post->status == 1) {
-        //     $post->status = '0';
-        // }
-        // if ($post->status == null) {
-        //     $post->status = '0';
-        // }
         return $post;
     }
 

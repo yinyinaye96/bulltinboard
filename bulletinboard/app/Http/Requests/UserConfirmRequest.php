@@ -27,7 +27,7 @@ class UserConfirmRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|max:100|email|unique:users,email',
             'password' => 'required|min:8',
-            'confirm-password' => 'required|same:password|min:8',
+            'confirm_password' => 'required|same:password|min:8',
             'type' => 'required',
             'profile' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
             

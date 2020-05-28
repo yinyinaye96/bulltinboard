@@ -85,38 +85,12 @@ class PostDao implements PostDaoInterface
      *  @param $request
      *  @return void
     */
-    // public function update($request) 
-    // {
-    //     // if ($request->get('status') == null) {
-    //     //     $status = 0;
-    //     // } else {
-    //     //     $status = request('status');
-    //     // }
-    //     $post = new Post();
-    //     $post = Post::find($request->input('id'));
-    //     $post->title = $request->input('title');
-    //     $post->description = $request->input('description');
-    //     $post->status = $request->input('status');
-    //     if (is_null($post->status)) {
-    //         $post->status = '0';
-    //     }
-    //     $post->updated_user_id =Auth::user()->id;
-    //     $post->updated_at = now();
-    //     $post->save();
-    //     return $post;
-    // }
     public function update($request) {
         $post = new Post();
         $post = Post::find($request->input('id'));
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->status = $request->input('status');
-        // if ($post->status == 0) {
-        //     $post->status = '0';
-        // }
-        // else {
-        //     $post->status = '1';
-        // }
         if (is_null($post->status)) {
             $post->status = '0';
         }
