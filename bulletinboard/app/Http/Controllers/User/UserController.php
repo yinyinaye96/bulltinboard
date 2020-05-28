@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Image;
 
+/**
+ * SystemName : bulletinboard
+ * ModuleName : User
+*/
+
 class UserController extends Controller
 {   
     private $userService;
@@ -35,13 +40,18 @@ class UserController extends Controller
         $this->userService = $userService;
     }
     
-    public function createUser()
+    /**
+     * Show Create User Form
+     *
+     * @return void
+     */
+    public function createUser(Request $request)
     {
         return view('users.create-user');
     }
 
     /**
-     * User Create Confirm Function
+     *Create User Confirm Function
      *
      * @param UserConfirmRequest $request
      * @return void
@@ -55,7 +65,7 @@ class UserController extends Controller
     }
 
     /**
-     * User Create Confirm Function
+     * Store User Function
      *
      * @param EmailRequest $request
      * @return void
@@ -67,6 +77,11 @@ class UserController extends Controller
         return redirect('userlist');
     }
     
+    /**
+     * Show User List
+     *
+     * @return void
+    */
     public function showUser() 
     {
         session()->forget([
@@ -81,6 +96,12 @@ class UserController extends Controller
         return view('users.user-list', compact('user'));
     }
 
+    /**
+     * Search User Function
+     *
+     * @param Request $request
+     * @return void
+    */
     public function searchUser(Request $request) 
     {
         
@@ -88,6 +109,12 @@ class UserController extends Controller
         return view('users.user-list',compact('user'));
     }
 
+    /**
+     * Soft Delete User Function
+     *
+     * @param $id
+     * @return void
+    */
     public function destroy($id) 
     {
         $user = User::find($id);
@@ -97,18 +124,28 @@ class UserController extends Controller
         return redirect('userlist');
     }
 
+    /**
+     * Show User Profile Funaction
+     *
+     * @return void
+    */
     public function profile()
     {
         return view('users.user-profile');
     }
 
+    /**
+     * Show User Update Funaction
+     *
+     * @return void
+    */
     public function updateUser()
     {
         return view('users.update-user');
     }
 
     /**
-     * User Create Confirm Function
+     *Create Update User Confirm Function
      *
      * @param UserUpdateComfirmRequest $request
      * @return void
@@ -119,21 +156,32 @@ class UserController extends Controller
         return view('users.update-user-comfirm', compact('user'));
     }
 
+    /**
+     *Create Update User Function
+     *
+     * @param Request $request
+     * @return void
+    */
     public function userUpdate(Request $request)
     {
         $user = $this->userService->userUpdate($request);
         return redirect('userlist');
     }
 
+    /**
+     *Show User Password 
+     *
+     * @return void
+    */
     public function password()
     {
         return view('users.change-password');
     }
 
     /**
-     * User Create Confirm Function
+     *Create Change Password Function
      *
-     * @param UserUpdateComfirmRequest $request
+     * @param ChangePassword $request
      * @return void
     */
     public function changePassword(ChangePassword $request)

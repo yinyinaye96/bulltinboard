@@ -6,10 +6,19 @@ use App\Contracts\Dao\User\UserDaoInterface;
 use App\Models\User;
 use DB;
 use Auth;
-// use Carbon\Carbon;
 
+/**
+ * SystemName : bulletinboard
+ * ModuleName : User
+*/
 class UserDao implements UserDaoInterface
 {
+    /**
+     * Store User Function
+     *
+     * @param $request
+     * @return void
+    */
     public function storeUser($user)
     {
         $store_user = new User ([
@@ -28,6 +37,12 @@ class UserDao implements UserDaoInterface
         return back();
     }
 
+    /**
+     * Show User List
+     *
+     * @param $user
+     * @return void
+    */
     public function showUser($user)
     {
         $user = new User;
@@ -35,6 +50,12 @@ class UserDao implements UserDaoInterface
         return $user;
     }
 
+    /**
+     * Search User Function
+     *
+     * @param $request
+     * @return void
+    */
     public function searchUser($request)
     {
         session([
@@ -66,12 +87,24 @@ class UserDao implements UserDaoInterface
 
     }
 
+    /**
+     * Soft Delete User Function
+     *
+     * @param $id
+     * @return void
+    */
     public function destroy($id)
     {
         $user = User::find($id)->delete();
         return back();
     }
 
+    /**
+     *Create Update User Function
+     *
+     * @param $request
+     * @return void
+    */
     public function userUpdate($request)
     {
         $user = new User();

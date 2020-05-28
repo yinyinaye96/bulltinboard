@@ -13,6 +13,11 @@
               <strong>{{ $errors->first('file') }}</strong>
             </span>
           @endif
+          @if (session('duplicate'))
+            <div class="alert alert-danger">
+                {{ session('duplicate') }}
+            </div>
+          @endif
           <div class="text-center">
             <button type="submit" class="btn btn-primary">{{__('Import File')}}</button>
           </div>

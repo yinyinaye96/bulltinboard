@@ -66,7 +66,13 @@
               <ul class="user-detail">
                 <li><span>Title:</span>{{ $post->title }}</li>
                 <li><span>Deacription:</span>{{ $post->description }}</li>
-                <li><span>Status:</span>{{ $post->status }}</li>
+                <li><span>Status:</span>
+                @if( $post->status == 1)
+                  Active
+                @else
+                  Inactive
+                @endif
+                </li>
                 <li><span>Create Date:</span>{{ $post->created_at->format('Y/m/d') }}</li>
                 @if($post->users)
                 <li><span>Create User:</span>{{ $post->users->name }}</li>

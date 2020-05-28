@@ -21,9 +21,8 @@
       </div>
       <div class="form-group row">
         <p class="form-txt">{{__('Status')}}</p>
-        <div class="custom-control custom-switch ">
-        <input value="1" name="status" type="checkbox" data-toggle="toggle" data-on="Active" data-off="Inactive" disabled {{ $post->status == 1 ? 'checked' : '' }}>
-        </div>
+        <input type="checkbox" data-toggle="toggle" data-on="active" data-off="inactive" name="status" value="1" class="custom-control-input" id="customSwitches"
+        @if(old('status', $post->status)=='1' ) {{"checked"}} @endif>   
       </div>
       <input type="hidden" name="id" value="{{ $post->id }}">
       <div class="form-group row">

@@ -8,13 +8,16 @@ use App\Models\User;
 use Auth;
 use Hash;
 
-class UserService implements UserServicesInterface
+/**
+ * SystemName : bulletinboard
+ * ModuleName : User
+*/class UserService implements UserServicesInterface
 {
     private $UserDao;
 
     /**
     * Class Constructor
-    * @param OperatorUserDaoInterface
+    * @param UserDaoInterface $UserDao
     * @return
     */
     public function __construct(UserDaoInterface $UserDao)
@@ -23,11 +26,10 @@ class UserService implements UserServicesInterface
     }
     
     /**
-     * User Create Confirm
-     * @param UserRequest $request
+     *Create  User Confirm Function
+     * @param $request
      * @return void
     */
-
     public function UserConfirm($request)
     {
         $user = new User;
@@ -49,9 +51,9 @@ class UserService implements UserServicesInterface
     /**
      * Store User Function
      *
-     * @param EmailRequest $request
+     * @param $request
      * @return void
-     */
+    */
     public function storeUser($request) 
     {
         $user = new User;
@@ -72,21 +74,45 @@ class UserService implements UserServicesInterface
         return $this->UserDao->storeUser($user);
     }
 
+    /**
+     * Show User List
+     *
+     * @param $user
+     * @return void
+    */
     public function showUser($user) 
     {
         return $this->UserDao->showUser($user);
     }
 
+    /**
+     * Search User Function
+     *
+     * @param $request
+     * @return void
+    */
     public function searchUser($request)
     {
         return $this->UserDao->searchUser($request);
     }
 
+    /**
+     * Soft Delete User Function
+     *
+     * @param $id
+     * @return void
+    */
     public function destroy($id)
     {
         return $this->UserDao->destroy($id);
     }
 
+    /**
+     *Create Update User Confirm Function
+     *
+     * @param $request
+     * @return void
+    */
     public function updateconfirmUser($request)
     {
         $user = User::find($request->id);
@@ -105,6 +131,12 @@ class UserService implements UserServicesInterface
         return $user;
     }
 
+    /**
+     *Create Update User Function
+     *
+     * @param $request
+     * @return void
+    */
     public function userUpdate($request)
     {
         return $this->UserDao->userUpdate($request);

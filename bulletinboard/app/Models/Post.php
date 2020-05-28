@@ -6,13 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 
+/**
+ * SystemName : bulletinboard
+ * ModuleName : Post
+ */
 class Post extends Model
 {
     use SoftDeletes;
 
+    /**
+     * The table associated with the model
+     *
+     * @var string
+    */
     protected $table = 'posts';
-
-    // protected $dates = ['deleted_at'];
 
     /**
     * The attributes that are mass assignable.

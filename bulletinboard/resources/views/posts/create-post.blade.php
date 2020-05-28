@@ -7,7 +7,7 @@
       <div class="form-group row">
         <p class="form-txt">{{ __('Post Title') }}</p>
         <div class="form-input">
-         <input type="text" name="title" id="title" value="{{ old('title') }}"  class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" >
+         <input id="lname" type="text" name="title" id="title" value="{{old('title', session('title'))}}"  class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" >
           @if ($errors->has('title'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('title') }}</strong>

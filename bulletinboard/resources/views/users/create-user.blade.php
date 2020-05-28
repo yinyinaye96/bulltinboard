@@ -7,7 +7,7 @@
       <div class="form-group row">
         <label for="name" class="form-txt">{{ __('Name') }}</label>
         <div class="form-input">
-          <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+          <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" autofocus>
           @if ($errors->has('name'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('name') }}</strong>
@@ -19,7 +19,7 @@
       <div class="form-group row">
         <label for="email" class="form-txt">{{ __('Email Address') }}</label>
         <div class="form-input">
-          <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+          <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" autofocus>
           @if ($errors->has('email'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('email') }}</strong>
@@ -31,7 +31,7 @@
       <div class="form-group row">
         <label for="password" class="form-txt">{{ __('Password') }}</label>
         <div class="form-input">
-          <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ old('password') }}" required autofocus>
+          <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ old('password') }}" autofocus>
           @if ($errors->has('password'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('password') }}</strong>
@@ -43,7 +43,7 @@
       <div class="form-group row">
         <label for="confirm-password" class="form-txt">{{ __('Comfirm Password') }}</label>
         <div class="form-input">
-          <input id="confirm-password" type="password" class="form-control{{ $errors->has('confirm-password') ? ' is-invalid' : '' }}" name="confirm-password" value="{{ old('confirm-password') }}" required autofocus>
+          <input id="confirm-password" type="password" class="form-control{{ $errors->has('confirm-password') ? ' is-invalid' : '' }}" name="confirm-password" value="{{ old('confirm-password') }}" autofocus>
           @if ($errors->has('confirm-password'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('confirm-password') }}</strong>
@@ -55,7 +55,7 @@
       <div class="form-group row">
         <label for="type" class="form-txt">{{ __('Type') }}</label>
         <div class="form-input">
-          <select name="type" id="type" required>
+          <select name="type" id="type">
             <option value="0"  {{ old('type') == 0 ? 'selected' : '' }}>Admin</option>
             <option value="1"  {{ old('type') == 1 ? 'selected' : '' }}>User</option>
           </select>
@@ -93,9 +93,9 @@
         <label for="address" class="form-txt">{{ __('Address') }}</label>
         <div class="form-input">
           <textarea class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" id="address" cols="30" rows="10" name="address"></textarea>
-          @if ($errors->has('dob'))
+          @if ($errors->has('address'))
             <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
+              <strong>{{ $errors->first('address') }}</strong>
             </span>
           @endif
         </div>
@@ -103,10 +103,10 @@
       <div class="form-group row">
         <label for="profile" class="form-txt">{{ __('Profile') }}</label>
         <div class="form-input preview">
-          <input id="profile" type="file" class="profile form-control @error('profile') is-invalid @enderror" name="profile" required autocomplete="profile" />
+          <input id="profile" type="file" class="profile form-control @error('profile') is-invalid @enderror" name="profile" autocomplete="profile" />
           @if ($errors->has('profile'))
           <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
+            <strong>{{ $errors->first('profile') }}</strong>
           </span>
           @endif
         </div>

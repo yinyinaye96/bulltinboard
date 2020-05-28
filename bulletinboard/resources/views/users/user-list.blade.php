@@ -10,7 +10,9 @@
         <input type="date" placeholder="Created To" name="fromDate" value="{{old('fromDate', session('fromDate'))}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}">
         <input type="date" placeholder="Created From" name="toDate" value="{{old('toDate', session('toDate'))}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}">
         <button type="submit" class="btn btn-primary">{{__('Search')}}</button>
+        @if (Auth::user()->type == '0') 
         <a href="{{ url('createuser') }}" class="btn btn-primary color-white">{{__('Add')}}</a>
+        @endif
       </form>
     </div>
     <table class="table table-bordered mt-3">

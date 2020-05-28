@@ -7,8 +7,18 @@ use App\Models\Post;
 use DB;
 use Auth;
 
+/**
+ * SystemName : bulletinboard
+ * ModuleName : Post
+*/
 class PostDao implements PostDaoInterface
 {
+    /**
+     * Store Post function
+     * 
+     *  @param $post
+     *  @return void
+    */
     public function storePost($post)
     {
         $storepost = new Post ([
@@ -21,6 +31,12 @@ class PostDao implements PostDaoInterface
         return back();
     }
 
+    /**
+     * Show Post list
+     *  
+     *  @param $postdata
+     *  @return void
+    */
     public function showPost($postdata)
     {
         $postdata = new Post;
@@ -28,6 +44,12 @@ class PostDao implements PostDaoInterface
         return $postdata;
     }
 
+    /**
+     * Search Post Function
+     *  
+     *  @param  $request
+     *  @return void
+    */
     public function searchPost($request)
     {
         session(['search' => $request->search]);
@@ -45,25 +67,59 @@ class PostDao implements PostDaoInterface
         return $postdata;
     }
 
+    /**
+     * Soft Delate Post Function
+     *  
+     *  @param $id
+     *  @return void
+    */
     public function destroy($id)
     {
         Post::find($id)->delete();
         return back();
     }
 
-    public function update($request) 
-    {
-        if ($request->get('status') == null) {
-            $status = 0;
-        } else {
-        // $status = request('status');
-            $status = 1;
-        }
+    /**
+     * Update Post Function
+     *  
+     *  @param $request
+     *  @return void
+    */
+    // public function update($request) 
+    // {
+    //     // if ($request->get('status') == null) {
+    //     //     $status = 0;
+    //     // } else {
+    //     //     $status = request('status');
+    //     // }
+    //     $post = new Post();
+    //     $post = Post::find($request->input('id'));
+    //     $post->title = $request->input('title');
+    //     $post->description = $request->input('description');
+    //     $post->status = $request->input('status');
+    //     if (is_null($post->status)) {
+    //         $post->status = '0';
+    //     }
+    //     $post->updated_user_id =Auth::user()->id;
+    //     $post->updated_at = now();
+    //     $post->save();
+    //     return $post;
+    // }
+    public function update($request) {
         $post = new Post();
         $post = Post::find($request->input('id'));
         $post->title = $request->input('title');
         $post->description = $request->input('description');
-        $post->status = $status;
+        $post->status = $request->input('status');
+        // if ($post->status == 0) {
+        //     $post->status = '0';
+        // }
+        // else {
+        //     $post->status = '1';
+        // }
+        if (is_null($post->status)) {
+            $post->status = '0';
+        }
         $post->updated_user_id =Auth::user()->id;
         $post->updated_at = now();
         $post->save();
@@ -79,5 +135,3 @@ class PostDao implements PostDaoInterface
 
 
 
-
-?>

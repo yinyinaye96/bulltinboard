@@ -25,7 +25,7 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => 'admin@gmail.com',
         'password' => '$2y$12$QbDu1X.nhAzO1M2ynNtW3uyjkuPSi09VijhQUkGGgbcvpm87U/1ju', // password
         'profile' => Str::random(10).'.jpg',
-        'type' => 1,
+        'type' => 0,
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
         'dob' => $faker->date,

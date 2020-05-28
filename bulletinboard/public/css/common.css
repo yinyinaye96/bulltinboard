@@ -104,3 +104,43 @@ ul.user-detail li {
 ul.user-detail li span {
 	width: 120px;
 }
+.content {
+	min-height: 500px;
+}
+.toggle.btn {
+	width: 30px!important;
+	height: 15px!important;
+	min-width: auto;
+    min-height: auto;
+}
+.toggle.btn-default {
+	border: #adb5bd solid 1px;
+}
+label.btn-default,.toggle-handle.btn-default {
+	border: none;
+}
+.toggle label::before {
+    position: absolute;
+    top: 0;
+    left: 14px;
+    display: block;
+    width: 13px;
+    height: 13px;
+    pointer-events: none;
+	content: "";
+	background-color: #fff;
+    border: #adb5bd solid 1px;
+    border-radius: 50%;
+}
+.toggle.off label::before {
+	top: 0;
+	left: 0;
+	background-color: #adb5bd;
+	border: #fff solid 1px;
+}
+.toggle.btn {
+	border-radius: 20px;
+}
+.toggle-on.btn {
+	padding-right: 0;
+}

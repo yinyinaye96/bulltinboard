@@ -9,12 +9,20 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * SystemName : bulletinboard
+ * ModuleName : User
+ */
 class User extends Authenticatable
 {
     use SoftDeletes,Notifiable;
 
+    /**
+     * The table associated with the model
+     *
+     * @var string
+    */
     protected $table = 'users';
-
     protected $dates = ['deleted_at'];
 
     /**
