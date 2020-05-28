@@ -68,7 +68,14 @@
               <ul class="user-detail">
                 <li><span>Name:</span>{{ $item->name }}</li>
                 <li><span>Email Address:</span>{{ $item->email }}</li>
-                <li><span>Type:</span>{{ $item->type }}</li>
+                <li>
+                  <span>Type:</span>
+                  @if($item->type == 1)
+                    User
+                  @else
+                    Admin
+                  @endif
+                </li>
                 <li><span>Phone:</span>{{ $item->phone }}</li>
                 <li><span>Date Of Birth:</span>{{ $item->dob }}</li>
                 <li><span>Address:</span>{{ $item->address }}</li>

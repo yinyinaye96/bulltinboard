@@ -7,7 +7,7 @@
       <div class="form-group row">
         <label for="name" class="form-txt">{{ __('Name') }}</label>
         <div class="form-input">
-          <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" autofocus>
+          <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name', session('name')) }}" autofocus>
           @if ($errors->has('name'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('name') }}</strong>
@@ -19,7 +19,7 @@
       <div class="form-group row">
         <label for="email" class="form-txt">{{ __('Email Address') }}</label>
         <div class="form-input">
-          <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" autofocus>
+          <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email', session('email')) }}" autofocus>
           @if ($errors->has('email'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('email') }}</strong>
@@ -31,7 +31,7 @@
       <div class="form-group row">
         <label for="password" class="form-txt">{{ __('Password') }}</label>
         <div class="form-input">
-          <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ old('password') }}" autofocus>
+          <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ old('password', session('password')) }}" autofocus>
           @if ($errors->has('password'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('password') }}</strong>
@@ -43,10 +43,10 @@
       <div class="form-group row">
         <label for="confirm-password" class="form-txt">{{ __('Comfirm Password') }}</label>
         <div class="form-input">
-          <input id="confirm-password" type="password" class="form-control{{ $errors->has('confirm-password') ? ' is-invalid' : '' }}" name="confirm-password" value="{{ old('confirm-password') }}" autofocus>
-          @if ($errors->has('confirm-password'))
+          <input id="confirm-password" type="password" class="form-control{{ $errors->has('confirm_password') ? ' is-invalid' : '' }}" name="confirm_password" value="{{ old('confirm_password', session('confirm_password')) }}" autofocus>
+          @if ($errors->has('confirm_password'))
             <span class="invalid-feedback" role="alert">
-              <strong>{{ $errors->first('confirm-password') }}</strong>
+              <strong>{{ $errors->first('confirm_password') }}</strong>
             </span>
           @endif
         </div>
@@ -56,8 +56,8 @@
         <label for="type" class="form-txt">{{ __('Type') }}</label>
         <div class="form-input">
           <select name="type" id="type">
-            <option value="0"  {{ old('type') == 0 ? 'selected' : '' }}>Admin</option>
-            <option value="1"  {{ old('type') == 1 ? 'selected' : '' }}>User</option>
+            <option value="0"  {{ session('type') == 0 ? 'selected' : '' }}>Admin</option>
+            <option value="1"  {{ session('type') == 1 ? 'selected' : '' }}>User</option>
           </select>
           @if ($errors->has('type'))
             <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
       <div class="form-group row">
         <label for="phone" class="form-txt">{{ __('Phone') }}</label>
         <div class="form-input">
-          <input id="phone" type="tel" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" autofocus>
+          <input id="phone" type="tel" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone', session('phone')) }}" autofocus>
           @if ($errors->has('phone'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('phone') }}</strong>
@@ -81,7 +81,7 @@
       <div class="form-group row">
         <label for="dob" class="form-txt">{{ __('Date Of Birth') }}</label>
         <div class="form-input">
-          <input id="dob" type="date" class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}" autofocus>
+          <input id="dob" type="date" class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob', session('dob')) }}" autofocus>
           @if ($errors->has('dob'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('dob') }}</strong>
@@ -92,7 +92,7 @@
       <div class="form-group row">
         <label for="address" class="form-txt">{{ __('Address') }}</label>
         <div class="form-input">
-          <textarea class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" id="address" cols="30" rows="10" name="address"></textarea>
+          <textarea class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" id="address" cols="30" rows="10" name="address">{{ old('address', session('address')) }}</textarea>
           @if ($errors->has('address'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('address') }}</strong>

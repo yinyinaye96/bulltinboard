@@ -22,9 +22,7 @@
       <div class="form-group row">
         <div class="col-sm-10 text-center">
           <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
-          <button type="button" class="btn btn-default">
-            <a href="{{ route('createpost') }}">{{ __('Cancel') }}</a>
-          </button>
+          <a href="{{ route('createpost') }}" class="btn btn-default">{{ __('Cancel') }}</a>
         </div>
       </div>
     </form>

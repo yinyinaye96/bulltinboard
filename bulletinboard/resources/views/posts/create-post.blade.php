@@ -7,7 +7,7 @@
       <div class="form-group row">
         <p class="form-txt">{{ __('Post Title') }}</p>
         <div class="form-input">
-         <input id="lname" type="text" name="title" id="title" value="{{old('title', session('title'))}}"  class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" >
+         <input id="lname" type="text" name="title" id="title" value="{{ old('title', session('title')) }}"  class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" >
           @if ($errors->has('title'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('title') }}</strong>
@@ -19,7 +19,7 @@
       <div class="form-group row">
         <p class="form-txt">{{ __('Post Description') }}</p>
         <div class="form-input">
-          <textarea name="description" id="description" cols="30" rows="10" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"></textarea>
+          <textarea name="description" id="description" cols="30" rows="10" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}">{{ old('description', session('description')) }}</textarea>
           @if ($errors->has('description'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('description') }}</strong>
