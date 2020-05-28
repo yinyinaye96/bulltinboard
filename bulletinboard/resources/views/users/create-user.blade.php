@@ -56,8 +56,8 @@
         <label for="type" class="form-txt">{{ __('Type') }}</label>
         <div class="form-input">
           <select name="type" id="type">
-            <option value="0"  {{ session('type') == 0 ? 'selected' : '' }}>Admin</option>
-            <option value="1"  {{ session('type') == 1 ? 'selected' : '' }}>User</option>
+            <option value="0" {{ session('type') == 0 ? 'selected' : '' }}>Admin</option>
+            <option value="1" {{ session('type') == 1 ? 'selected' : '' }}>User</option>
           </select>
           @if ($errors->has('type'))
             <span class="invalid-feedback" role="alert">
